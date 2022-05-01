@@ -6,7 +6,7 @@ on:
 
 jobs:
   ci:
-    uses: SamuelNoB/Trabalho-Individual-2021-2/.github/workflows/main.yml@main
+    uses: SamuelNoB/Trabalho-Individual-2021-2/.github/workflows/ci.yml@main
 
   deploy:
     needs: ci
