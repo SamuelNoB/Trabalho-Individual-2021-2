@@ -6,7 +6,7 @@ on:
 
 jobs:
   ci:
-    uses: Matheus73/Trabalho-Individual-2021-2/.github/workflows/main.yml@main
+    uses: SamuelNoB/Trabalho-Individual-2021-2/.github/workflows/main.yml@main
 
   deploy:
     needs: ci
@@ -33,4 +33,4 @@ jobs:
         with:
           context: "{{defaultContext}}:aplicacao"
           push: true
-          tags: bigode73/biblioteca-pessoal:latest
+          tags: samuelnogueira/biblioteca-pessoal:latest
