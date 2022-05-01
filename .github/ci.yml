@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  workflow_call:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a new docker network
+        working-directory: ./aplicacao
+        run: docker network create gces-network
+
+      - name: Run the docker aplication
+        working-directory: ./aplicacao
+        run: docker-compose up -d 
+
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a new docker network
+        working-directory: ./aplicacao
+        run: docker network create gces-network
+
+      - name: Run the docker aplication
+        working-directory: ./aplicacao
+        run: docker-compose run biblioteca-pessoal bash -c "rails db:reset;rspec"
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a new docker network
+        working-directory: ./aplicacao
+        run: docker network create gces-network
+
+      - name: Run the docker aplication
+        working-directory: ./aplicacao
+        run: docker-compose run biblioteca-pessoal bash -c "gem install rubocop; rubocop --fail-level F"
